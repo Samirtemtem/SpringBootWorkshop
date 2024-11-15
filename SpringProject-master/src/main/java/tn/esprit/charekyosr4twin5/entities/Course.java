@@ -1,5 +1,6 @@
 package tn.esprit.charekyosr4twin5.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -11,6 +12,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -35,7 +37,8 @@ public class Course implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private TypeCourse typeCourse;
-    @OneToMany(mappedBy = "course")
-    Set<Registration> registrations;
+    @JsonIgnore
+    @OneToMany(mappedBy = "course",cascade = {CascadeType.ALL})
+    Set<Registration> registrations= new HashSet<>();
 
 }

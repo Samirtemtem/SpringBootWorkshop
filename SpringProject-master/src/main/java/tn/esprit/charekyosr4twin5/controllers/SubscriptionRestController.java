@@ -2,6 +2,8 @@ package tn.esprit.charekyosr4twin5.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import tn.esprit.charekyosr4twin5.entities.Skieur;
 import tn.esprit.charekyosr4twin5.entities.Subscription;
 import tn.esprit.charekyosr4twin5.Services.SubscriptionServiceImpl;
 
@@ -38,4 +40,9 @@ public class SubscriptionRestController {
     public void deleteSubscription(@PathVariable Long numSubscription) {
         subscriptionService.removeSubscription(numSubscription);
     }
+    @PutMapping("/addAndAssignToCourse/{numCourse}")
+    public Skieur addSkieurAndAssignToCourse(@RequestBody Skieur skieur, @PathVariable("numCourse") Long numCourse) {
+        return subscriptionService.addSkieurAndAssignToCourse(skieur, numCourse);
+    }
+    
 }

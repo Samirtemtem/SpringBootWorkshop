@@ -9,4 +9,5 @@ public interface IInstructorService {
     void removeInstructor(Long numInstructor);
     Instructor retrieveInstructor(Long numInstructor);
     List<Instructor> getAllInstructors();
+
 }

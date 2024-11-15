@@ -2,14 +2,12 @@ package tn.esprit.charekyosr4twin5.Services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import tn.esprit.charekyosr4twin5.Repositories.IPisteRepository;
-import tn.esprit.charekyosr4twin5.Repositories.ISkieurRepository;
-import tn.esprit.charekyosr4twin5.entities.Color;
-import tn.esprit.charekyosr4twin5.entities.Piste;
-import tn.esprit.charekyosr4twin5.entities.Skieur;
+import tn.esprit.charekyosr4twin5.Repositories.*;
+import tn.esprit.charekyosr4twin5.entities.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +15,12 @@ public class SkierServicesimpl implements ISkierService {
 
     private final ISkieurRepository skieurRepository;
     private final IPisteRepository pisteRepository;
+
+    private final IRegistrationRepository registrationRepository;
+
+    private final ISubscriptionRepository subscriptionRepository;
+
+    private final ICourseRepository courseRepository;
 
     @Override
     public Skieur addSkier(Skieur skieur) {
@@ -51,6 +55,17 @@ public class SkierServicesimpl implements ISkierService {
     @Override
     public List<Skieur> searchByFirstAndOrLastName(String name) {
         return List.of();
+    }
+
+    public Skieur addSkierAndAssignToCourse (Skieur skier, Long numCours) {
+        Course cours =courseRepository.findById(numCours).orElseThrow (null);
+        Set<Registration> inscriptions =skier.getRegistrations();
+        for ( Registration inscription :inscriptions){
+            inscription.setSkieur (skier);
+            inscription.setCourse (cours);
+            registrationRepository.save(inscription);
+        }
+        return skieurRepository.save(skier);
     }
 
     @Override
@@ -91,5 +106,6 @@ public class SkierServicesimpl implements ISkierService {
     }
 
 
-    }
+
+   }
 

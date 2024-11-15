@@ -1,5 +1,6 @@
 package tn.esprit.charekyosr4twin5.Services;
 
+import tn.esprit.charekyosr4twin5.entities.Skieur;
 import tn.esprit.charekyosr4twin5.entities.Subscription;
 import java.util.List;
 
@@ -9,4 +10,21 @@ public interface ISubscriptionService {
     void removeSubscription(Long numSubscription);
     Subscription retrieveSubscription(Long numSubscription);
     List<Subscription> getAllSubscriptions();
+
+    /* @Override
+         public List<Subscription> getAllSubscriptions() {
+             return (List<Subscription>) subscriptionRepository.findAll();
+         }
+           public Skieur addSkieurAndAssignToCourse(Skieur skieur, Long numCourse) {
+             Course course = courseRepository.findById(numCourse).orElse(null);
+             Set<Course> courseSet = new HashSet<>();
+
+             courseSet.add(course);
+             skieur.setSubscription(courseSet);
+             return subscriptionRepository.save(skieur);
+         }
+         */
+    Skieur addSkieurAndAssignToCourse(Skieur skieur, Long numCourse);
+
+    Skieur addSkierAndAssignToCourse(Skieur skier, Long numCourse);
 }

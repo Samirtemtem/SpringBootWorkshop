@@ -30,11 +30,11 @@ public class Skieur implements Serializable {
 
     private LocalDate birthDate;
     private String city;
-
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @JsonIgnore
+    @OneToOne(cascade = {CascadeType.ALL,CascadeType.PERSIST, CascadeType.REMOVE})
     Subscription subscription;
-
-    @OneToMany(mappedBy = "skieur")
+    @JsonIgnore
+    @OneToMany(cascade = {CascadeType.ALL},mappedBy = "skieur")
     Set<Registration> registrations;
 
     @ManyToMany

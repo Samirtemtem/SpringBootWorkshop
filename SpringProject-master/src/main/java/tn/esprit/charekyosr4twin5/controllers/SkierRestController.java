@@ -40,9 +40,14 @@ private final SkierServicesimpl skierServices;
     public List<Skieur> getByBirthDate(@PathVariable LocalDate birthDate){
         return skierServices.findByBirthDate(birthDate);
     }
-    @PostMapping("/assign/{name}/{color}")
-    public Skieur assignSkierToPiste(@PathVariable String name, @PathVariable Color color) {
-        Skieur assignedSkier = skierServices.assignSkierToPiste(name, color);
-        return assignedSkier;
+
+
+    @PostMapping("/addSkierAndAssignToCourse/{numCourse}")
+    Skieur addSkierAndAssignToCourse(@RequestBody Skieur skier,@RequestParam Long numCours){
+        return skierServices.addSkierAndAssignToCourse(skier,numCours);
     }
+   /* @GetMapping("/retrieveSkiersBySubscriptionType/{type_abonnement}")
+    List<Skieur> retrieveSkiersBySubscriptionType(@RequestParam TypeAbonnement typeAbonnement){
+        return skierServices.retrieveSkiersBySubscriptionType (typeAbonnement);
+    }*/
 }
